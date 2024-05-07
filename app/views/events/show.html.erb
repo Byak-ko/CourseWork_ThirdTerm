@@ -1,0 +1,26 @@
+
+<body>
+  <div class="event-container">
+    <div class="event-details">    
+      <h2><%= @event.name %></h2>
+      <p><%= @event.description %></p>
+    </div>
+
+    <div class="participants">
+      <h3>Учасники події:</h3>
+      <ul>
+        <% @event.event_participations.each do |participation| %>
+          <li><%= "#{participation.member.first_name} #{participation.member.last_name}" %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="participation-buttons">
+      <% if current_member.events.include?(@event) %>
+       <%= button_to "Відмовитися від участі", event_event_participation_path(@event, current_member.event_participations.find_by(event_id: @event.id)), method: :delete, data: { confirm: "Ви впевнені?" }, class: "btn btn-danger" %>
+      <% else %>
+        <%= button_to "Взяти участь", event_event_participations_path(@event), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</body>

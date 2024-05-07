@@ -1,0 +1,43 @@
+<h1>Список учасників</h1>
+
+<table class="table" color: secondary>
+  <thead>
+    <tr>
+      <th scope="col">Ім'я</th>
+      <th scope="col">Прізвище</th>
+      <th scope="col">Адреса</th>
+      <th scope="col">Електронна пошта</th>
+      <th scope="col">Номер телефону</th>
+      <th scope="col">Роль</th>
+      <th scope="col">Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.first_name, member_path(member) %></td>
+    <td><%= member.last_name %></td>
+    <td><%= member.address %></td>
+    <td><%= member.email %></td>
+    <td><%= member.phone %></td>
+    <td><%= member.admin? ? 'Адміністратор' : 'Учасник' %></td>
+    <% if @current_user&.admin? && @current_user != member  %>
+      <td>
+
+        <%= link_to "Редагувати", edit_member_path(member), class: "btn btn-sm mb-2 btn-warning", style: "width: 100px" %>
+        <%= form_with(url: delete_member_path(member), method: :delete) do |form| %>
+          <%= form.submit "Видалити", class: "btn btn-sm btn-danger", style: "width: 100px" %>
+
+        <% end %>
+      </td>
+    <% elsif @current_user == member %>   
+      <td>
+
+         <%= link_to "Редагувати", edit_member_path(member), class: "btn btn-sm btn-warning", style: "width: 100px" %>
+
+         </td> 
+    <% end %>
+  </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,48 @@
+<h1>Інформація про замовлення</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Створив</th>
+    <td>
+      <% creator = Member.find_by(id: @order_info.creator_id) %>
+      <% if creator.present? %>
+        <%= link_to creator.first_name, member_path(creator) %>
+      <% else %>
+        Клієнт не знайдений
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Придбав</th>
+    <td>
+      <% buyer = Member.find_by(id: @order_info.buyer_id) %>
+      <% if buyer.present? %>
+        <%= link_to buyer.first_name, member_path(buyer) %>
+      <% else %>
+        Товар ще не придбали
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Товар</th>
+    <td>
+      <% item = ItemInfo.find_by(id: @order_info.item_info_id) %>
+      <% if item.present? %>
+        <%= link_to item.name, item_info_path(item) %>
+      <% else %>
+        Товар не знайдений
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>Ціна</th>
+    <td><%= number_to_currency(@order_info.price) %></td>
+  </tr>
+</table>
+
+<% if current_member.present? && @order_info.creator_id != current_member.id && @order_info.buyer_id.blank? %>
+  <%= form_with(model: @order_info, url: order_info_path(@order_info), method: :patch) do |form| %>
+    <%= form.submit "Придбати", class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Назад до списку замовлень", order_infos_path %>

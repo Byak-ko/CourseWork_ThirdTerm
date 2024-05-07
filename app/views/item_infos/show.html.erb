@@ -1,0 +1,32 @@
+<h1>Інформація про товар</h1>
+<table class="table table-striped">
+  <tr>
+    <th scope="row">Назва</th>
+    <td><%= @item_info.name %></td>
+  </tr>
+  <tr>
+    <th scope="row">Опис</th>
+    <td><%= @item_info.description %></td>
+  </tr>
+  <tr>
+    <th scope="row">Фото</th>
+    <td><%= image_tag @item_info.image.variant(resize_to_limit: [400, 400]) if @item_info.image.attached? %></td>
+  </tr>
+  <tr>
+    <th scope="row">Категорія</th>
+      <td><%= @item_info.category_value %></td>
+  </tr>
+</table>
+
+<% if @item_info.order_infos.any? %>
+  <h2>Замовлення для цього товару:</h2>
+  <ul>
+    <% @item_info.order_infos.each do |order_info| %>
+      <li><%= link_to "Замовлення ##{order_info.id}", order_info_path(order_info) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Наразі для цього товару немає замовлень.</p>
+<% end %>
+
+<%= link_to "Назад до списку товарів", item_infos_path, class: "btn btn-secondary" %>

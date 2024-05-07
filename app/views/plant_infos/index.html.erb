@@ -1,0 +1,32 @@
+<h1>Інформація про рослини</h1>
+
+<% if @current_member&.admin? %>
+  <%= link_to "Створити новий запис", new_plant_info_path, class: "btn btn-success mt-3" %>
+<% end %>
+<% @plant_infos.each do |plant| %>
+  <div class="info-container card">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <div class="photo">
+          <% if plant.image.attached? %>
+            <%= image_tag plant.image.variant(resize_to_limit: [370, 250]), class: "img-fluid" %>
+          <% else %>
+            <p class="card-text">Зображення відсутнє</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="infoName"><%= plant.name %></h5>
+          <p class="card-text"><%= plant.description %></p>
+          <p class="card-text"><strong>Оптимальні умови росту:</strong> <%= plant.optimal_growth_conditions %></p>
+          <% if @current_member&.admin? %>
+            <%= link_to "Редагувати", edit_plant_info_path(plant), class: "btn btn-warning mr-2", style: "margin-left: 300px" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

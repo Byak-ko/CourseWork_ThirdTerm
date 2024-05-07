@@ -1,0 +1,42 @@
+<body>
+  <h1>Редагувати інформацію про користувача</h1>
+  
+  <%= form_with(model: @member, local: true) do |form| %>
+
+    <div class="field">
+      <%= form.label :"Ім'я" %>
+      <%= form.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :"Прізвище" %>
+      <%= form.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :"Електронна пошта" %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div class="field">
+      <%= form.label :"Номер телефону" %>
+      <%= form.text_field :phone %>
+    </div>
+
+    
+    <div class="field">
+     <%= form.label :"Роль" %>
+     <% if !@member.admin? && current_member.admin? %>
+     <%= form.select :role, options_for_select([['Учасник', 'Учасник'], ['Адміністратор', 'Адміністратор']], selected: @member.role) %>
+       <% else %> 
+     <%= form.label :"Роль", @member.role %>
+     <% end %>
+    </div>
+
+
+    <div class="actions">
+      <%= form.submit :"Оновити" %>
+    </div>
+  <% end %>
+</body>
+

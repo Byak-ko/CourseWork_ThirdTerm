@@ -1,0 +1,194 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 20px;
+      background-color: lightblue;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  
+    }
+    h1 {
+      text-align: center;
+    }
+    p {
+      text-align: center;
+    }
+
+   
+    .event-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .event {
+      margin-bottom: 20px;
+      border-bottom: 5px solid #ddd;
+      padding-bottom: 20px;
+    }
+    .event:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .event h2 {
+      color: #333;
+    }
+    .event-date {
+      font-size: 18px;
+      color: #666;
+    }
+    .event-location {
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .event-description {
+      margin-top: 10px;
+    }
+    .event-organizer {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .event-details {
+      margin-bottom: 20px;
+    }
+    .participants {
+      margin-bottom: 20px;
+    }
+    .participation-buttons {
+      margin-bottom: 20px;
+    } 
+
+    .info-container {
+      margin-bottom: 20px;
+    }
+    .photo img {
+      width: 370px;
+      height: 250px;
+    }
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .field input[type="text"],
+    .field textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .actions {
+      text-align: center;
+    }
+
+    .actions input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .actions input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #f9f9f9;
+    }
+    
+    thead th {
+      background-color: #f2f2f2;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    tbody td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+    }
+    
+    
+    tbody tr:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .document-name,
+    .uploader-info {
+      font-size: 24px; 
+    }
+
+
+    .navbar-nav .nav-link:hover {
+      color: black !important;
+    }
+  
+    .navbar-brand .nav-link {
+    color: black !important;
+  }
+    
+
+    .infoName {
+      margin-left: 320px;
+    }

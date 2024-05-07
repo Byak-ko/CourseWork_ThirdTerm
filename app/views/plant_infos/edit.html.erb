@@ -1,0 +1,32 @@
+<body>
+  <h1>Редагувати інформацію про рослину: <%= @plant_info.name %></h1>
+
+  <div class="form-container">
+    <%= form_with(model: @plant_info, local: true) do |form| %>
+
+      <div class="field">
+        <%= form.label :name, "Назва" %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description, "Опис" %>
+        <%= form.text_area :description %>
+      </div>
+
+      <div class="field">
+        <%= form.label :optimal_growth_conditions, "Оптимальні умови росту" %>
+        <%= form.text_area :optimal_growth_conditions %>
+      </div>
+
+      <div class="field">
+        <%= form.label :image, "Фотографія" %>
+        <%= form.file_field :image %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Оновити інформацію" %>
+      </div>
+    <% end %>
+  </div>
+</body>

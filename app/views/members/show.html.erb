@@ -1,0 +1,47 @@
+<h1>Інформація про користувача</h1>
+<div class="card">
+  <div class="card-body">
+    <p class="card-text"><strong>Ім'я:</strong> <%= @member.first_name %></p>
+    <p class="card-text"><strong>Прізвище:</strong> <%= @member.last_name %></p>
+    <p class="card-text"><strong>Email:</strong> <%= @member.email %></p>
+    <p class="card-text"><strong>Телефон:</strong> <%= @member.phone %></p>
+    <p class="card-text"><strong>Роль:</strong> <%= @member.role %></p>
+
+    <% if @member.orders.any? %>
+      <h2 class="card-title">Замовлення:</h2>
+      <ul class="list-group">
+        <% @member.orders.each do |order| %>
+          <% unless order.buyer_id.present? %>
+            <li class="list-group-item"><%= link_to "Замовлення ##{order.id}", order_info_path(order) %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="card-text">Цей користувач ще не створив жодного замовлення.</p>
+    <% end %>
+
+    <% if @member.club_documents.any? %>
+      <h2 class="card-title">Документи:</h2>
+      <ul class="list-group">
+        <% @member.club_documents.each do |document| %>
+          <li class="list-group-item"><%= link_to document.document.filename, rails_blob_path(document.document, disposition: "attachment") %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="card-text">Цей користувач ще не додав жодного документа.</p>
+    <% end %>
+
+    <% if @member.events.any? %>
+      <h2 class="card-title">Заходи:</h2>
+      <ul class="list-group">
+        <% @member.events.each do |event| %>
+          <li class="list-group-item"><%= link_to event.name, event_path(event) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="card-text">Цей користувач ще не бере участі в жодному заході.</p>
+    <% end %>
+
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<h1>Інформація про риб</h1>
+
+<% if @current_member&.admin? %>
+  <%= link_to "Створити новий запис", new_fish_info_path, class: "btn btn-success mt-3" %>
+<% end %>
+<% @fish_infos.each do |fish| %>
+  <div class="info-container card">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <div class="photo">
+          <% if fish.image.attached? %>
+            <%= image_tag fish.image.variant(resize_to_limit: [300, 200]), class: "img-fluid" %>
+          <% else %>
+            <p class="card-text">Зображення відсутнє</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= fish.name %></h5>
+          <p class="card-text"><%= fish.description %></p>
+          <p class="card-text"><strong>Особливості:</strong> <%= fish.features %></p>
+          <% if @current_member&.admin? %>
+            <%= link_to "Редагувати", edit_fish_info_path(fish), class: "btn btn-warning mr-2" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+

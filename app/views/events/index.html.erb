@@ -1,0 +1,35 @@
+<h1>Сторінка Заходів</h1>
+
+<% if current_member&.admin? %>
+  <div class="mb-4">
+    <%= link_to 'Створити новий захід', new_event_path, class: 'btn btn-primary', style: "margin-left: 470px" %>
+  </div>
+<% end %>
+
+<body>  
+  <div class="event-container">
+    <% @events.each do |event| %>
+      <div class="event">
+        <h2><%= event.name %></h2>
+        <p class="event-date">Дата: <%= event.date.strftime("%d.%m.%Y") %></p>
+        <p class="event-location">Місце: <%= event.location %></p>
+        <p class="event-description"><%= event.description %></p>
+        <p class="event-organizer">Організатор: <%= event.organizer %></p>
+        <%= link_to "Подивитися всіх учасників", event_event_participations_path(event), class: "btn mb-2 btn-info" %>
+        <% if current_member.present? %>
+          <% if current_member.events.include?(event) %>
+            <%= button_to "Відмовитися від участі", event_event_participation_path(event, current_member.event_participations.find_by(event_id: event.id)), method: :delete, class: "btn mb-2 btn-warning" %>
+          <% else %>
+            <%= form_with(model: current_member.event_participations.build(event_id: event.id), url: event_event_participations_path(event), method: :post) do |form| %>
+              <%= form.submit "Взяти участь", class: "btn mb-2 btn-primary" %>
+            <% end %>
+          <% end %>
+          <% if current_member&.admin? %>
+            <%= button_to "Видалити", event_path(event), method: :delete, class: "btn mb-2 btn-danger" %>
+          <% end %>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+  </div>
+</body>

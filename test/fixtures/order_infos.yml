@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  date: 2024-04-30
+  member: one
+  items: MyString
+  quantity: 1
+  total_price: 1.5
+
+two:
+  order_number: MyString
+  date: 2024-04-30
+  member: two
+  items: MyString
+  quantity: 1
+  total_price: 1.5

@@ -1,0 +1,35 @@
+<h1>Клубна документація</h1>
+<br>
+<%= form_with(model: @new_document, url: club_documents_path, local: true, multipart: true) do |form| %>
+  <div class="form-group">
+    <h3>Оберіть файл для завантаження</h3>
+    <br>
+    <%= form.file_field :document, class: "form-control", style: "width: 400px" %>
+  </div>
+  <%= form.submit "Завантажити", class: "btn btn-primary" %>
+<% end %>
+
+<div class="document-list">
+  <br>
+  <h2>Список</h2>
+  <% @club_documents.each do |document| %>
+    <div class="document">
+      <% if document.document.attached? %>
+        <span class="document-name">
+            <br>
+          <%= link_to document.document.filename, rails_blob_path(document.document, disposition: "attachment") %>
+        </span>
+        <% if document.member.present? %>
+          <span class="uploader-info">Додав: <%= link_to document.member.first_name, member_path(document.member) %></span>
+        <% end %>
+        <% if current_member&.admin?  %>
+          <%= button_to "Видалити", club_document_path(document), method: :delete, data: { confirm: "Ви впевнені?" }, class: "btn bn-sml btn-danger" %>
+        <% elsif current_member.present? && current_member == document.member %>
+          <%= button_to "Видалити", club_document_path(document), method: :delete, data: { confirm: "Ви впевнені?" }, class: "btn bn-sml btn-danger" %>
+        <% end %>
+      <% else %>
+        <span>Файл не прикріплено</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

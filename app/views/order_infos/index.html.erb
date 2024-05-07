@@ -1,0 +1,82 @@
+<h1>Список замовлень</h1>
+
+<%= form_tag(order_infos_path, method: :get, id: "filter-form") do %>
+  <div class="form-group">
+    <%= label_tag "filter", "Фільтрувати за:" %>
+    <%= select_tag :filter, options_for_select([
+      ["Всі замовлення", "show_all"],
+      ["Активні", "active"],
+      ["Неактивні", "inactive"],
+      ["Придбані вами", "purchased"],
+      ["Ваші замовлення", "created_by_current_user"]
+    ], params[:filter]), class: "form-control", id: "filter-select" %>
+  </div>
+  <%= link_to "Створити замовлення", new_order_info_path, class: "btn btn-success" %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Клієнт</th>
+      <th>Товар</th>
+      <th>Сума</th>
+      <th>Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% @order_infos.each do |order_info| %>
+      <% case params[:filter]
+         when "active"
+           next if order_info.buyer_id.present?
+         when "inactive"
+           next if order_info.buyer_id.blank?
+         when "purchased"
+           next unless order_info.buyer_id.present? && order_info.buyer_id.eql?(current_member.id)
+         when "created_by_current_user"
+           next unless order_info.creator_id.eql?(current_member.id)
+      end %>
+      <tr>
+        <td><%= order_info.created_at.strftime("%d.%m.%Y") %></td>
+        <td>
+          <% member = Member.find_by(id: order_info.creator_id) %>
+          <% if member.present? %>
+            <%= link_to member.first_name, member_path(member) %>
+          <% else %>
+            Клієнт не знайдений
+          <% end %>
+        </td>
+        <td>
+          <% item = ItemInfo.find_by(id: order_info.item_info_id) %>
+          <% if item.present? %>
+            <%= link_to item.name, item_info_path(item) %>
+          <% else %>
+            Товар не знайдений
+          <% end %>
+        </td>
+        <td><%= number_to_currency(order_info.price) %></td>
+        <td>
+        <%= link_to "Переглянути", order_info_path(order_info), class: "btn btn-primary btn-sm", style: "width: 110px" %>
+        <% if order_info.creator_id.eql?(current_member.id) && order_info.buyer_id.blank? %>
+          <%= form_with(url: delete_order_info_path(order_info), method: :delete) do |form| %>
+            <%= form.submit "Видалити", class: "btn btn-danger btn-sm", style: "width: 110px" %>
+          <% end %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const filterForm = document.getElementById("filter-form");
+    const filterSelect = document.getElementById("filter-select");
+
+    filterSelect.addEventListener("change", function() {
+      filterForm.submit();
+    });
+  });
+</script>

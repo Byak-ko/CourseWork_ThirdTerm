@@ -1,0 +1,52 @@
+<h1>Список товарів</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Назва</th>
+      <th scope="col">Опис</th>
+      <th scope="col">Категорія</th>
+      <th scope="col">Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+    
+<%= form_tag(item_infos_path, method: "get", id: "filter-form") do %>
+  <div class="form-group">
+    <%= label_tag "category", "Оберіть категорію:" %>
+    <%= select_tag :category, options_for_select([["Всі товари", ""], *ItemInfo.categories.map  { |key, value| [value, key] }], params[:category]), class: "form-control", id: "category-select" %>
+
+  </div>
+<% end %>
+
+   <% if current_member&.admin? %>
+      <%= link_to "Новий товар", new_item_info_path, class: "btn btn-success" %>
+    <% end %>
+
+    <% @item_infos.each do |item_info| %>
+      <tr>
+        <td><%= item_info.name %></td>
+        <td><%= item_info.description %></td>
+        <td><%= item_info.category_value %></td>
+        <td>
+          <%= link_to "Переглянути", item_info_path(item_info), class: "btn btn-primary btn-sm" %>
+          <% if current_member&.admin? %>
+            <%= link_to "Редагувати", edit_item_info_path(item_info), class: "btn btn-warning btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const filterForm = document.getElementById("filter-form");
+    const filterSelect = document.getElementById("category-select");
+
+    filterSelect.addEventListener("change", function() {
+      filterForm.submit();
+    });
+  });
+</script>
+

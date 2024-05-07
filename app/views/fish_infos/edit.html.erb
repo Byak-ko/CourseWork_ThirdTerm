@@ -1,0 +1,32 @@
+<body>
+  <h1>Редагувати інформацію про рибу: <%= @fish_info.name %></h1>
+
+  <div class="form-container">
+    <%= form_with(model: @fish_info, local: true) do |form| %>
+
+      <div class="field">
+        <%= form.label :name, "Назва" %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description, "Опис" %>
+        <%= form.text_area :description %>
+      </div>
+
+      <div class="field">
+        <%= form.label :features, "Особливості" %>
+        <%= form.text_area :features %>
+      </div>
+
+      <div class="field">
+        <%= form.label :image, "Фотографія" %>
+        <%= form.file_field :image %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Оновити інформацію" %>
+      </div>
+    <% end %>
+  </div>
+</body>

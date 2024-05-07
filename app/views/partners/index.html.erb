@@ -1,0 +1,33 @@
+<body>
+  <div class="container">
+    <h1 class="mb-4">Організації-партнери</h1>
+    <% if current_member.admin? %>
+      <div class="mb-4">
+        <%= link_to 'Створити нового партнера', new_partner_path, class: 'btn btn-primary', style: "margin-left: 430px" %>
+      </div>
+    <% end %>
+    <div class="row">
+      <% @partners.each do |partner| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+               <div class="d-flex justify-content-center">
+              <h5 class="card-title"><%= partner.name %></h5>
+              </div>
+              <p class="card-text">Електронна пошта: <%= partner.email %></p>
+              <p class="card-text">Номер телефону: <%= partner.phone %></p>
+              <% if current_member.admin? %>
+              <div class="d-flex justify-content-center">
+                <%= link_to 'Редагувати', edit_partner_path(partner), class: 'btn btn-warning mr-2', style: "width: 110px" %>
+                  <%= form_with(url: delete_partner_path(partner), method: :delete) do |form| %>                 
+                    <%= form.submit "Видалити", class: "btn btn-danger mr-2", style: "width: 110px" %>
+                    </div>
+                  <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</body>
