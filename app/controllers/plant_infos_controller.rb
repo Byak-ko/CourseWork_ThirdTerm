@@ -29,10 +29,16 @@ class PlantInfosController < ApplicationController
     @plant_info = PlantInfo.new(plant_info_params)
 
     if @plant_info.save
-      redirect_to @plant_info
+      redirect_to plant_infos_path
     else
       render :new
     end
+  end
+
+  def destroy
+    @plant_info = PlantInfo.find(params[:id])
+    @plant_info.destroy
+    redirect_to plant_infos_path
   end
 
   private

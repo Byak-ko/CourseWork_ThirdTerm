@@ -41,8 +41,12 @@ Rails.application.routes.draw do
     delete 'delete', on: :member, to: 'partners#destroy'
   end
   resources :club_documents
-  resources :fish_infos
-  resources :plant_infos
+  resources :fish_infos do
+    delete 'delete', on: :member, to: 'fish_infos#destroy'
+  end
+  resources :plant_infos do
+    delete 'delete', on: :member, to: 'plant_infos#destroy'
+  end
   resources :order_infos do
     delete 'delete', on: :member, to: 'order_infos#destroy'
   end

@@ -38,6 +38,7 @@ class MembersController < ApplicationController
     def destroy
         @member = Member.find(params[:id])
         @member.destroy
+        redirect_to @member
     end
   
     private

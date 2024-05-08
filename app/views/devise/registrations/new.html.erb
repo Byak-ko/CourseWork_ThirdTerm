@@ -1,48 +1,48 @@
-<h2>Sign up</h2>
+<h2>Зареєструватися</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true %>
+    <%= f.label :"Ім'я" %><br />
+    <%= f.text_field :first_name, autofocus: true, class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <%= f.label :Прізвище %><br />
+    <%= f.text_field :last_name, class: "form-control form-control-sm" , style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+    <%= f.label :Адреса %><br />
+    <%= f.text_field :address, class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
+    <%= f.label :Телефон %><br />
+    <%= f.text_field :phone, class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.label :Електронна_пошта %><br />
+    <%= f.email_field :email, autocomplete: "email", class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
+    <%= f.label :Пароль %><br />
     <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(мінімум <%= @minimum_password_length %> символів)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :Підтвердження_пароля %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm", style:"width: 300px" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Зареєструватися", class: "btn btn-primary btn-sm", style:"width: 300px" %>
   </div>
 <% end %>
 

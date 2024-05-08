@@ -33,7 +33,7 @@
 
     <% if @member.events.any? %>
       <h2 class="card-title">Заходи:</h2>
-      <ul class="list-group">
+      <ul class="list-group"> 
         <% @member.events.each do |event| %>
           <li class="list-group-item"><%= link_to event.name, event_path(event) %></li>
         <% end %>

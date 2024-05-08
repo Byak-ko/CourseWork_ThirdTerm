@@ -21,7 +21,10 @@
           <p class="card-text"><%= plant.description %></p>
           <p class="card-text"><strong>Оптимальні умови росту:</strong> <%= plant.optimal_growth_conditions %></p>
           <% if @current_member&.admin? %>
-            <%= link_to "Редагувати", edit_plant_info_path(plant), class: "btn btn-warning mr-2", style: "margin-left: 300px" %>
+            <%= link_to "Редагувати", edit_plant_info_path(plant), class: "btn btn-warning mr-2 mb-2", style: "margin-left: 300px; width: 120px;" %>
+                   <%= form_with(url: delete_plant_info_path(plant), method: :delete) do |form| %>                 
+                <%= form.submit "Видалити", class: "btn btn-danger mr-2", style: "margin-left: 300px; width: 120px;" %>
+              <% end %>
           <% end %>
         </div>
       </div>

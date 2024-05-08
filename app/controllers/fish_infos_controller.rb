@@ -26,10 +26,16 @@ class FishInfosController < ApplicationController
     @fish_info = FishInfo.new(fish_info_params)
 
     if @fish_info.save
-      redirect_to @fish_info
+      redirect_to fish_infos_path
     else
       render :new
     end
+  end
+
+  def destroy
+    @fish_info = FishInfo.find(params[:id])
+    @fish_info.destroy
+    redirect_to fish_infos_path
   end
 
   private

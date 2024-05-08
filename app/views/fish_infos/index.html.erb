@@ -9,7 +9,7 @@
       <div class="col-md-4">
         <div class="photo">
           <% if fish.image.attached? %>
-            <%= image_tag fish.image.variant(resize_to_limit: [300, 200]), class: "img-fluid" %>
+            <%= image_tag fish.image.variant(resize_to_limit: [370, 400]), class: "img-fluid" %>
           <% else %>
             <p class="card-text">Зображення відсутнє</p>
           <% end %>
@@ -17,11 +17,14 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title"><%= fish.name %></h5>
+          <h5 class="infoName"><%= fish.name %></h5>
           <p class="card-text"><%= fish.description %></p>
           <p class="card-text"><strong>Особливості:</strong> <%= fish.features %></p>
           <% if @current_member&.admin? %>
-            <%= link_to "Редагувати", edit_fish_info_path(fish), class: "btn btn-warning mr-2" %>
+            <%= link_to "Редагувати", edit_fish_info_path(fish), class: "btn btn-warning mr-2 mb-2",  style: "margin-left: 300px; width: 120px;" %>
+              <%= form_with(url: delete_fish_info_path(fish), method: :delete) do |form| %>                 
+                <%= form.submit "Видалити", class: "btn btn-danger mr-2", style: "margin-left: 300px; width: 120px;" %>
+              <% end %>
           <% end %>
         </div>
       </div>
